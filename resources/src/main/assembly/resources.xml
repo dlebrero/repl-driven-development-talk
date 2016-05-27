@@ -1,0 +1,46 @@
+<assembly>
+    <id>resources</id>
+    <formats>
+        <format>zip</format>
+    </formats>
+    <includeBaseDirectory>false</includeBaseDirectory>
+    <fileSets>
+        <fileSet>
+            <directory>${basedir}/src/main/properties/prod</directory>
+            <outputDirectory>prod/properties</outputDirectory>
+        </fileSet>
+        <fileSet>
+            <directory>${basedir}/src/main/properties/uat</directory>
+            <outputDirectory>uat/properties</outputDirectory>
+        </fileSet>
+        <fileSet>
+            <directory>${basedir}/src/main/properties/test</directory>
+            <outputDirectory>test/properties</outputDirectory>
+        </fileSet>
+        <fileSet>
+            <directory>${basedir}/src/main/properties/dev</directory>
+            <outputDirectory>dev/properties</outputDirectory>
+        </fileSet>
+
+       <fileSet>
+          <directory>${basedir}/src/main/properties</directory>
+          <outputDirectory>prod/properties</outputDirectory>
+          <includes><include>common</include></includes>
+       </fileSet>
+       <fileSet>
+          <directory>${basedir}/src/main/properties</directory>
+          <outputDirectory>uat/properties</outputDirectory>
+          <includes><include>common</include></includes>
+       </fileSet>
+       <fileSet>
+          <directory>${basedir}/src/main/properties</directory>
+          <outputDirectory>test/properties</outputDirectory>
+          <includes><include>common</include></includes>
+       </fileSet>
+       <fileSet>
+          <directory>${basedir}/src/main/properties</directory>
+          <includes><include>common</include></includes>
+          <outputDirectory>dev/properties</outputDirectory>
+       </fileSet>
+    </fileSets>
+</assembly>

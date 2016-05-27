@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration scan="true" scanPeriod="1 minutes">
+
+   <property resource="logback-config.properties" />
+
+   <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+      <encoder>
+         <pattern>%-5level %date \(%logger{30}\) [%thread] - %msg%n</pattern>
+      </encoder>
+   </appender>
+
+   <appender name="rollingFileAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+      <!--Specifiy filename param as required by project-->
+      <file>logs/TestService.log</file>
+      <append>true</append>
+      <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+         <fileNamePattern>logs/TestService.log.%i
+         </fileNamePattern>
+         <minIndex>1</minIndex>
+         <maxIndex>10</maxIndex>
+      </rollingPolicy>
+      <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+         <maxFileSize>20MB</maxFileSize>
+      </triggeringPolicy>
+      <encoder>
+         <pattern>%date severity=%-5level logger=%logger{30} thread="%thread" transactionGUID="%X{transactionGUID}" msg=%msg%n</pattern>
+         <immediateFlush>true</immediateFlush>
+      </encoder>
+   </appender>
+
+   <appender name="async" class="ch.qos.logback.classic.AsyncAppender">
+      <appender-ref ref="rollingFileAppender" />
+      <!-- Specify the queue size here as required by project-->
+      <queueSize>1000</queueSize>
+      <!-- Turn the discarding behaviour off.-->
+      <discardingThreshold>20</discardingThreshold>
+      <includeCallerData>false</includeCallerData>
+   </appender>
+
+   <logger name="com.ning.http" level="INFO" >
+      <appender-ref ref="async" />
+      <appender-ref ref="console" />
+   </logger>
+
+   <logger name="org.eclipse.jetty" level="INFO" >
+      <appender-ref ref="async" />
+      <appender-ref ref="console" />
+   </logger>
+
+   <root level="${LOG_LEVEL:-INFO}">
+      <appender-ref ref="async"/>
+   </root>
+
+   <root level="${CONSOLE_LOG_LEVEL:-OFF}">
+      <appender-ref ref="console"/>
+   </root>
+
+</configuration>

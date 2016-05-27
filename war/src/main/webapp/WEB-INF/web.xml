@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<web-app xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
+         version="2.4">
+
+   <listener>
+      <listener-class>org.lpetit.ring.servlet.RingServletContextListener</listener-class>
+   </listener>
+
+   <context-param>
+      <param-name>context-init</param-name>
+      <param-value>com.iggroup.wt.testservice.main/servlet-context-init</param-value>
+   </context-param>
+
+   <context-param>
+      <param-name>context-destroy</param-name>
+      <param-value>com.iggroup.wt.testservice.main/servlet-context-destroy</param-value>
+   </context-param>
+
+   <servlet>
+      <servlet-name>wt-test-project</servlet-name>
+      <servlet-class>org.lpetit.ring.servlet.RingHttpServlet</servlet-class>
+      <init-param>
+         <param-name>handler</param-name>
+         <param-value>com.iggroup.wt.testservice.servlet-handler/servlet-handler</param-value>
+      </init-param>
+   </servlet>
+
+   <servlet-mapping>
+      <servlet-name>wt-test-project</servlet-name>
+      <url-pattern>/*</url-pattern>
+   </servlet-mapping>
+</web-app>

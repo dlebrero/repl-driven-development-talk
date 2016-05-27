@@ -1,0 +1,424 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+   <modelVersion>4.0.0</modelVersion>
+
+   <parent>
+      <groupId>com.iggroup.wt.testservice</groupId>
+      <artifactId>wt-test-project</artifactId>
+      <version>1.0.0-SNAPSHOT</version>
+   </parent>
+   <artifactId>wt-test-project-war</artifactId>
+   <packaging>war</packaging>
+   <name>wt-test-project-war</name>
+
+   <properties>
+      <clojure.commons.version>1.2.0</clojure.commons.version>
+      <ring.version>1.4.0</ring.version>
+   </properties>
+
+   <dependencies>
+
+      <!-- LOGGING SECTION -->
+      <dependency>
+         <groupId>org.clojure</groupId>
+         <artifactId>tools.logging</artifactId>
+         <version>0.3.1</version>
+      </dependency>
+      <dependency>
+         <groupId>ch.qos.logback</groupId>
+         <artifactId>logback-classic</artifactId>
+      </dependency>
+      <dependency>
+         <groupId>org.slf4j</groupId>
+         <artifactId>slf4j-api</artifactId>
+      </dependency>
+      <dependency>
+         <groupId>org.slf4j</groupId>
+         <artifactId>log4j-over-slf4j</artifactId>
+      </dependency>
+      <dependency>
+         <groupId>org.slf4j</groupId>
+         <artifactId>jcl-over-slf4j</artifactId>
+      </dependency>
+      <!-- END LOGGING -->
+
+      <dependency>
+         <groupId>org.clojure</groupId>
+         <artifactId>clojure</artifactId>
+         <version>1.7.0</version>
+      </dependency>
+      <dependency>
+         <groupId>org.clojure</groupId>
+         <artifactId>tools.nrepl</artifactId>
+         <version>0.2.10</version>
+      </dependency>
+
+      <dependency>
+         <groupId>medley</groupId>
+         <artifactId>medley</artifactId>
+         <version>0.7.0</version>
+      </dependency>
+      <dependency>
+         <groupId>robert</groupId>
+         <artifactId>hooke</artifactId>
+         <version>1.3.0</version>
+      </dependency>
+
+      <dependency>
+         <groupId>prismatic</groupId>
+         <artifactId>schema</artifactId>
+         <version>0.4.4</version>
+      </dependency>
+
+      <dependency>
+         <groupId>clojure-complete</groupId>
+         <artifactId>clojure-complete</artifactId>
+         <version>0.2.4</version>
+      </dependency>
+
+      <dependency>
+         <groupId>timing</groupId>
+         <artifactId>timing</artifactId>
+         <version>0.1.4</version>
+      </dependency>
+
+       <!-- WEB STUFF -->
+       <dependency>
+          <groupId>metosin</groupId>
+          <artifactId>compojure-api</artifactId>
+          <version>0.23.1</version>
+          <exclusions>
+             <exclusion>
+                <groupId>org.eclipse.jetty</groupId>
+                <artifactId>jetty-server</artifactId>
+             </exclusion>
+          </exclusions>
+       </dependency>
+
+       <dependency>
+          <groupId>ring</groupId>
+          <artifactId>ring-servlet</artifactId>
+          <version>${ring.version}</version>
+          <exclusions>
+             <exclusion>
+                <artifactId>servlet-api</artifactId>
+                <groupId>javax.servlet</groupId>
+             </exclusion>
+          </exclusions>
+       </dependency>
+       <dependency>
+          <groupId>ring</groupId>
+          <artifactId>ring-core</artifactId>
+          <version>${ring.version}</version>
+       </dependency>
+       <dependency>
+          <groupId>org.lpetit.ring</groupId>
+          <artifactId>ring-java-servlet</artifactId>
+          <version>0.2.0</version>
+       </dependency>
+
+       <dependency>
+          <groupId>metosin</groupId>
+          <artifactId>ring-swagger-ui</artifactId>
+          <version>2.1.8-M1</version>
+       </dependency>
+
+      <!-- CRON JOBS -->
+      <dependency>
+         <groupId>schejulure</groupId>
+         <artifactId>schejulure</artifactId>
+         <version>1.0.1</version>
+      </dependency>
+
+      <!-- CACHE -->
+      <dependency>
+         <groupId>org.clojure</groupId>
+         <artifactId>core.memoize</artifactId>
+         <version>0.5.7</version>
+      </dependency>
+
+      <!-- DB STUFF -->
+      <dependency>
+         <groupId>org.clojure</groupId>
+         <artifactId>java.jdbc</artifactId>
+         <version>0.4.2-ig</version>
+      </dependency>
+      <dependency>
+         <groupId>com.oracle</groupId>
+         <artifactId>ojdbc6</artifactId>
+         <version>${ojdbc6.version}</version>
+         <scope>provided</scope>
+      </dependency>
+
+      <!-- XML -->
+      <dependency>
+         <groupId>org.clojure</groupId>
+         <artifactId>data.xml</artifactId>
+         <version>0.0.8</version>
+      </dependency>
+
+      <dependency>
+         <groupId>org.clojure</groupId>
+         <artifactId>data.zip</artifactId>
+         <version>0.1.1</version>
+      </dependency>
+
+       <dependency>
+         <groupId>com.cemerick</groupId>
+         <artifactId>pomegranate</artifactId>
+         <version>0.3.0</version>
+         <scope>test</scope>
+       </dependency>
+
+      <!--<dependency>-->
+         <!--<groupId>clj-kafka</groupId>-->
+         <!--<artifactId>clj-kafka</artifactId>-->
+         <!--<version>0.3.4</version>-->
+      <!--</dependency>-->
+
+
+
+      <dependency>
+         <groupId>incanter</groupId>
+         <artifactId>incanter</artifactId>
+         <version>1.9.0</version>
+      </dependency>
+
+      <!-- TEST SECTION -->
+      <dependency>
+         <groupId>midje</groupId>
+         <artifactId>midje</artifactId>
+         <version>1.7.0</version>
+         <scope>test</scope>
+      </dependency>
+
+      <dependency>
+         <groupId>ring</groupId>
+         <artifactId>ring-mock</artifactId>
+         <version>0.3.0</version>
+         <scope>test</scope>
+      </dependency>
+
+      <dependency>
+         <groupId>enlive</groupId>
+         <artifactId>enlive</artifactId>
+         <version>1.1.6</version>
+         <scope>test</scope>
+      </dependency>
+
+       <!-- DEV TOOLS SECTION -->
+      <dependency>
+         <groupId>spyscope</groupId>
+         <artifactId>spyscope</artifactId>
+         <version>0.1.5</version>
+         <scope>test</scope>
+      </dependency>
+
+      <dependency>
+         <groupId>im.chit</groupId>
+         <artifactId>vinyasa</artifactId>
+         <version>0.4.2</version>
+         <scope>test</scope>
+      </dependency>
+   </dependencies>
+
+   <build>
+      <finalName>testservice</finalName>
+   </build>
+
+   <profiles>
+      <profile>
+         <id>default</id>
+         <activation>
+            <activeByDefault>true</activeByDefault>
+         </activation>
+         <build>
+            <plugins>
+               <plugin>
+                  <groupId>com.theoryinpractise</groupId>
+                  <artifactId>clojure-maven-plugin</artifactId>
+                  <version>1.3.23</version>
+                  <configuration>
+                     <warnOnReflection>false</warnOnReflection>
+                     <compileDeclaredNamespaceOnly>true</compileDeclaredNamespaceOnly>
+                     <namespaces>
+                        <namespace>none</namespace>
+                     </namespaces>
+                  </configuration>
+                  <executions>
+                     <execution>
+                        <id>compile</id>
+                        <phase>compile</phase>
+                        <goals>
+                           <goal>compile</goal>
+                        </goals>
+                     </execution>
+                     <execution>
+                        <id>test</id>
+                        <phase>test</phase>
+                        <goals>
+                           <goal>test</goal>
+                        </goals>
+                        <configuration>
+                           <testSourceDirectories>
+                              <testSourceDirectory>src/test/clojure</testSourceDirectory>
+                              <testSourceDirectory>../resources/src/main/properties/common</testSourceDirectory>
+                              <testSourceDirectory>../resources/src/main/properties/dev</testSourceDirectory>
+                           </testSourceDirectories>
+                        </configuration>
+                     </execution>
+                  </executions>
+               </plugin>
+            </plugins>
+         </build>
+      </profile>
+      <profile>
+         <id>devrun</id>
+         <build>
+            <plugins>
+               <plugin>
+                  <groupId>org.apache.tomcat.maven</groupId>
+                  <artifactId>tomcat7-maven-plugin</artifactId>
+                  <configuration>
+                     <path>/${project.build.finalName}</path>
+                     <additionalClasspathDirs>
+                        <dir>${basedir}/src/main/clojure</dir>
+                        <dir>${basedir}/src/test/clojure</dir>
+                        <dir>${basedir}/src/dev</dir>
+                        <dir>${basedir}/src/test/ctest</dir>
+                        <dir>${basedir}/../resources/src/main/properties/common</dir>
+                        <dir>${basedir}/../resources/src/main/properties/dev</dir>
+                     </additionalClasspathDirs>
+                     <useTestClasspath>true</useTestClasspath>
+                     <contextFile>${basedir}/../resources/src/main/properties/dev/context.xml</contextFile>
+                     <systemProperties>
+                        <dark.live.dir>${basedir}/src/dev</dark.live.dir>
+                        <site>DEV</site>
+                        <environment>DEV</environment>
+                     </systemProperties>
+                  </configuration>
+                  <dependencies>
+                     <dependency>
+                        <groupId>com.oracle</groupId>
+                        <artifactId>ojdbc6</artifactId>
+                        <version>${ojdbc6.version}</version>
+                     </dependency>
+                  </dependencies>
+                  <executions>
+                     <execution>
+                        <id>start-it</id>
+                        <goals>
+                           <goal>run</goal>
+                        </goals>
+                        <phase>generate-resources</phase>
+                     </execution>
+                  </executions>
+               </plugin>
+            </plugins>
+         </build>
+      </profile>
+
+      <profile>
+         <id>ctrun</id>
+         <build>
+            <plugins>
+               <plugin>
+                  <groupId>org.codehaus.mojo</groupId>
+                  <artifactId>build-helper-maven-plugin</artifactId>
+                  <executions>
+                     <execution>
+                        <id>reserve-ports</id>
+                        <phase>pre-integration-test</phase>
+                        <goals>
+                           <goal>reserve-network-port</goal>
+                        </goals>
+                        <configuration>
+                           <portNames>
+                              <portName>tomcat.port</portName>
+                              <portName>fake.servers.port</portName>
+                              <portName>nrepl.port</portName>
+                           </portNames>
+                        </configuration>
+                     </execution>
+                  </executions>
+               </plugin>
+               <plugin>
+                  <groupId>org.apache.tomcat.maven</groupId>
+                  <artifactId>tomcat7-maven-plugin</artifactId>
+                  <configuration>
+                     <path>/${project.build.finalName}</path>
+                     <useTestClasspath>false</useTestClasspath>
+                     <contextFile>${basedir}/../resources/src/main/properties/ctest/context.xml</contextFile>
+                     <systemProperties>
+                        <nrepl.port>${nrepl.port}</nrepl.port>
+                        <fake.servers.port>${fake.servers.port}</fake.servers.port>
+                        <dark.live.dir>${basedir}/src/dev</dark.live.dir>
+                        <site>CT</site>
+                        <environment>CT</environment>
+                     </systemProperties>
+                     <fork>true</fork>
+                     <useSeparateTomcatClassLoader>true</useSeparateTomcatClassLoader>
+                     <port>${tomcat.port}</port>
+                  </configuration>
+                  <dependencies>
+                     <dependency>
+                        <groupId>com.oracle</groupId>
+                        <artifactId>ojdbc6</artifactId>
+                        <version>${ojdbc6.version}</version>
+                     </dependency>
+                  </dependencies>
+                  <executions>
+                     <execution>
+                        <id>start-tomcat</id>
+                        <goals>
+                           <goal>run-war</goal>
+                        </goals>
+                        <phase>pre-integration-test</phase>
+                     </execution>
+                     <execution>
+                        <id>stop-tomcat</id>
+                        <goals>
+                           <goal>shutdown</goal>
+                        </goals>
+                        <phase>post-integration-test</phase>
+                     </execution>
+                  </executions>
+               </plugin>
+               <plugin>
+                  <groupId>com.theoryinpractise</groupId>
+                  <artifactId>clojure-maven-plugin</artifactId>
+                  <version>1.3.23</version>
+                  <executions>
+                     <execution>
+                        <id>ctest</id>
+                        <phase>integration-test</phase>
+                        <goals>
+                           <goal>test</goal>
+                        </goals>
+                        <configuration>
+                           <vmargs>-Dnrepl.port=${nrepl.port} -Dfake.servers.port=${fake.servers.port}
+                              -Dtomcat.port=${tomcat.port}</vmargs>
+                           <testSourceDirectories>
+                              <testSourceDirectory>src/test/ctest</testSourceDirectory>
+                              <testSourceDirectory>../resources/src/main/properties/common</testSourceDirectory>
+                              <testSourceDirectory>../resources/src/main/properties/ctest</testSourceDirectory>
+                           </testSourceDirectories>
+                        </configuration>
+                     </execution>
+                  </executions>
+               </plugin>
+            </plugins>
+         </build>
+         <dependencies>
+            <dependency>
+               <artifactId>servlet-api</artifactId>
+               <groupId>javax.servlet</groupId>
+               <version>2.5</version>
+               <scope>test</scope>
+            </dependency>
+         </dependencies>
+      </profile>
+   </profiles>
+
+</project>

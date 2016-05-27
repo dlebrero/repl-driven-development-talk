@@ -1,0 +1,20 @@
+<Context>
+  <Resource name="ig/jdbc/datasource/tier1"
+            auth="Container"
+            type="javax.sql.DataSource"
+            maxActive="10"
+            maxIdle="6"
+            maxWait="4000"
+            initialSize="0"
+            minIdle="0"
+            testWhileIdle="true"
+            timeBetweenEvictionRunsMillis="600000"
+            numTestsPerEvictionRun="4"
+            validationQuery="select 1 from dual"
+            username="user"
+            password="passwd"
+            testOnBorrow="true"
+            factory="org.apache.tomcat.jdbc.pool.DataSourceFactory"
+            driverClassName="oracle.jdbc.OracleDriver"
+            url="url"/>
+</Context>
