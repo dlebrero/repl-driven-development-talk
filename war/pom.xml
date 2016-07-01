@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
    <modelVersion>4.0.0</modelVersion>
 
@@ -83,46 +84,46 @@
          <version>0.1.4</version>
       </dependency>
 
-       <!-- WEB STUFF -->
-       <dependency>
-          <groupId>metosin</groupId>
-          <artifactId>compojure-api</artifactId>
-          <version>0.23.1</version>
-          <exclusions>
-             <exclusion>
-                <groupId>org.eclipse.jetty</groupId>
-                <artifactId>jetty-server</artifactId>
-             </exclusion>
-          </exclusions>
-       </dependency>
+      <!-- WEB STUFF -->
+      <dependency>
+         <groupId>metosin</groupId>
+         <artifactId>compojure-api</artifactId>
+         <version>0.23.1</version>
+         <exclusions>
+            <exclusion>
+               <groupId>org.eclipse.jetty</groupId>
+               <artifactId>jetty-server</artifactId>
+            </exclusion>
+         </exclusions>
+      </dependency>
 
-       <dependency>
-          <groupId>ring</groupId>
-          <artifactId>ring-servlet</artifactId>
-          <version>${ring.version}</version>
-          <exclusions>
-             <exclusion>
-                <artifactId>servlet-api</artifactId>
-                <groupId>javax.servlet</groupId>
-             </exclusion>
-          </exclusions>
-       </dependency>
-       <dependency>
-          <groupId>ring</groupId>
-          <artifactId>ring-core</artifactId>
-          <version>${ring.version}</version>
-       </dependency>
-       <dependency>
-          <groupId>org.lpetit.ring</groupId>
-          <artifactId>ring-java-servlet</artifactId>
-          <version>0.2.0</version>
-       </dependency>
+      <dependency>
+         <groupId>ring</groupId>
+         <artifactId>ring-servlet</artifactId>
+         <version>${ring.version}</version>
+         <exclusions>
+            <exclusion>
+               <artifactId>servlet-api</artifactId>
+               <groupId>javax.servlet</groupId>
+            </exclusion>
+         </exclusions>
+      </dependency>
+      <dependency>
+         <groupId>ring</groupId>
+         <artifactId>ring-core</artifactId>
+         <version>${ring.version}</version>
+      </dependency>
+      <dependency>
+         <groupId>org.lpetit.ring</groupId>
+         <artifactId>ring-java-servlet</artifactId>
+         <version>0.2.0</version>
+      </dependency>
 
-       <dependency>
-          <groupId>metosin</groupId>
-          <artifactId>ring-swagger-ui</artifactId>
-          <version>2.1.8-M1</version>
-       </dependency>
+      <dependency>
+         <groupId>metosin</groupId>
+         <artifactId>ring-swagger-ui</artifactId>
+         <version>2.1.8-M1</version>
+      </dependency>
 
       <!-- CRON JOBS -->
       <dependency>
@@ -142,14 +143,20 @@
       <dependency>
          <groupId>org.clojure</groupId>
          <artifactId>java.jdbc</artifactId>
-         <version>0.4.2-ig</version>
+         <version>0.6.1</version>
       </dependency>
+
       <dependency>
-         <groupId>com.oracle</groupId>
-         <artifactId>ojdbc6</artifactId>
-         <version>${ojdbc6.version}</version>
-         <scope>provided</scope>
+         <groupId>superstring</groupId>
+         <artifactId>superstring</artifactId>
+         <version>2.1.0</version>
       </dependency>
+
+      <!--<dependency>-->
+      <!--<groupId>org.postgresql</groupId>-->
+      <!--<artifactId>postgresql</artifactId>-->
+      <!--<version>9.4-1202-jdbc42</version>-->
+      <!--</dependency>-->
 
       <!-- XML -->
       <dependency>
@@ -164,20 +171,18 @@
          <version>0.1.1</version>
       </dependency>
 
-       <dependency>
+      <dependency>
          <groupId>com.cemerick</groupId>
          <artifactId>pomegranate</artifactId>
          <version>0.3.0</version>
          <scope>test</scope>
-       </dependency>
+      </dependency>
 
       <!--<dependency>-->
-         <!--<groupId>clj-kafka</groupId>-->
-         <!--<artifactId>clj-kafka</artifactId>-->
-         <!--<version>0.3.4</version>-->
+      <!--<groupId>clj-kafka</groupId>-->
+      <!--<artifactId>clj-kafka</artifactId>-->
+      <!--<version>0.3.4</version>-->
       <!--</dependency>-->
-
-
 
       <dependency>
          <groupId>incanter</groupId>
@@ -207,7 +212,7 @@
          <scope>test</scope>
       </dependency>
 
-       <!-- DEV TOOLS SECTION -->
+      <!-- DEV TOOLS SECTION -->
       <dependency>
          <groupId>spyscope</groupId>
          <artifactId>spyscope</artifactId>
@@ -226,6 +231,13 @@
    <build>
       <finalName>testservice</finalName>
    </build>
+
+   <repositories>
+      <repository>
+         <id>clojars.org</id>
+         <url>http://clojars.org/repo</url>
+      </repository>
+   </repositories>
 
    <profiles>
       <profile>
@@ -280,6 +292,7 @@
                <plugin>
                   <groupId>org.apache.tomcat.maven</groupId>
                   <artifactId>tomcat7-maven-plugin</artifactId>
+                  <version>2.2</version>
                   <configuration>
                      <path>/${project.build.finalName}</path>
                      <additionalClasspathDirs>
@@ -293,17 +306,11 @@
                      <useTestClasspath>true</useTestClasspath>
                      <contextFile>${basedir}/../resources/src/main/properties/dev/context.xml</contextFile>
                      <systemProperties>
-                        <dark.live.dir>${basedir}/src/dev</dark.live.dir>
                         <site>DEV</site>
                         <environment>DEV</environment>
                      </systemProperties>
                   </configuration>
                   <dependencies>
-                     <dependency>
-                        <groupId>com.oracle</groupId>
-                        <artifactId>ojdbc6</artifactId>
-                        <version>${ojdbc6.version}</version>
-                     </dependency>
                   </dependencies>
                   <executions>
                      <execution>
@@ -353,7 +360,6 @@
                      <systemProperties>
                         <nrepl.port>${nrepl.port}</nrepl.port>
                         <fake.servers.port>${fake.servers.port}</fake.servers.port>
-                        <dark.live.dir>${basedir}/src/dev</dark.live.dir>
                         <site>CT</site>
                         <environment>CT</environment>
                      </systemProperties>
@@ -362,11 +368,6 @@
                      <port>${tomcat.port}</port>
                   </configuration>
                   <dependencies>
-                     <dependency>
-                        <groupId>com.oracle</groupId>
-                        <artifactId>ojdbc6</artifactId>
-                        <version>${ojdbc6.version}</version>
-                     </dependency>
                   </dependencies>
                   <executions>
                      <execution>
@@ -397,8 +398,7 @@
                            <goal>test</goal>
                         </goals>
                         <configuration>
-                           <vmargs>-Dnrepl.port=${nrepl.port} -Dfake.servers.port=${fake.servers.port}
-                              -Dtomcat.port=${tomcat.port}</vmargs>
+                           <vmargs>-Dnrepl.port=${nrepl.port} -Dfake.servers.port=${fake.servers.port} -Dtomcat.port=${tomcat.port}</vmargs>
                            <testSourceDirectories>
                               <testSourceDirectory>src/test/ctest</testSourceDirectory>
                               <testSourceDirectory>../resources/src/main/properties/common</testSourceDirectory>
