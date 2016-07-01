@@ -88,4 +88,5 @@
   [coordinates]
   (pomegranate/add-dependencies :coordinates coordinates
                                 :local-repo "C:\\dev\\maven-repo"
-                                :repositories {"central"    "http://repo1.maven.org/maven2/"}))
+                                :repositories {"central"    "http://repo1.maven.org/maven2/"
+                                               "clojars"    "http://clojars.org/repo"}))
