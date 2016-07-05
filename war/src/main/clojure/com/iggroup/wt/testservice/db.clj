@@ -1,47 +1,95 @@
 (ns com.iggroup.wt.testservice.db
   (:require clojure.string
-            [com.iggroup.wt.testservice.core :as core]))
-
+            [com.iggroup.wt.testservice.core :as core]
+            [com.iggroup.util.dev :as dev]
+            [com.iggroup.util.proc :as proc :refer [def-proc]]
+            [clj-http.client :as http]
+            [clojure.java.jdbc :as jdbc]
+            [cheshire.core :as json])
+  (:import (java.sql Types)))
 
 
 (comment
-  (get-watchlist-info db :account-id account)
-  (def wls (get-watchlist-info db :account-id account))
-  (class wls)
-  (keys wls)
-  (:csr-info wls)
-  (>print-table (:csr-info wls))
+  (def db "jdbc:postgresql://localhost:5431/dlebrero")
 
-  (:csr-views (get-watchlist-instruments db :account-id account :view-id "2888109"))
+  (jdbc/query db "select 1")
 
-  (get-watchlist-info db :account-id "i am not a valid account")
-  (get-watchlist-instruments db :account-id account :view-id "I do not exist")
-  (get-watchlist-instruments db :account-id "an invalid account" :view-id "2888109")
-
-  (>print-table (map #(select-keys % [:my_views_id :market_count :editable]) (:csr-info wls)))
-
-  (mapv #(select-keys % [:my_views_id :market_count :editable]) (:csr-info wls))
-  )
-
-(defn has-markets? [wl]
-  (> 0 (:market_count wl)))
-
-(defn parse-wls [wls]
+  (user/add-dependencies '[[org.postgresql/postgresql "9.4-1202-jdbc42"]])
   )
 
 (comment
-  (user/autotest)
 
-  (parse-wls
-      (:csr-info
-        (get-watchlist-info db :account-id account))))
+  (dev/find-table db :schema "public" :table "%transa%")
+  (>print-table
+    (dev/find-table db :schema "public" :table "%transa%"))
+
+  (jdbc/query db ["select * from transaction"])
+
+  (take 3 (jdbc/query db ["select * from transaction"]))
+
+  (>print-table (take 3 (jdbc/query db ["select * from transaction"])))
+
+  (jdbc/query db ["select * from transaction where client = ?" 1])
+  )
 
 (comment
-  (defn get-wls-epics [db account-id]
-    (->>
-      (get-watchlist-info db :account-id account-id)
-      :csr-info
-      parse-wls
-      (map (partial get-watchlist-instruments db :account-id account-id :view-id))
-      (mapcat :csr-views)
-      (map :epic))))
+
+  (>print-table (by-client db 1))
+
+  (http/get "http://localhost:30000/exchanges")
+  )
+
+(comment
+
+  (dev/find-proc db :name "%trans%")
+  (>print-table (dev/find-proc db :name "%trans%"))
+  (>print-table (dev/find-proc db :name "%trans%" :schema "public"))
+
+  (dev/find-proc db :name "transactions_in_gbp")
+
+  (->> (dev/find-proc db :name "transactions_in_gbp")
+       first
+       (dev/describe-proc db)
+       >print-table)
+
+  (->> (dev/find-proc db :name "transactions_in_gbp")
+      first
+       (dev/describe-proc db)
+       dev/print-definition)
+  )
+
+(comment
+
+  (transactions-in-gbp db :clientid 1)
+
+  (mapcat
+    #(:return-value (transactions-in-gbp db :clientid %))
+    (range 15))
+
+  (do
+    (require '(incanter core charts))
+    (->> (mapcat
+           #(-> (transactions-in-gbp db :clientid %)
+                :return-value)
+           (range 20))
+         (map (comp #(BigDecimal. %) :amount))
+         incanter.charts/histogram
+         incanter.core/view)))
+
+(defn type= [expected]
+  (fn [tx]
+    (= expected (:type tx))))
+
+(defn summary [txs]
+  (->> txs
+       ;(filter (comp neg? :amount))
+       ;(remove (type= 101))
+       (map :amount)
+       (reduce +)))
+
+(comment
+  (user/autotest))
+
+(comment
+  (defn total-transactions [db client]
+    (summary (:return-value (transactions-in-gbp db :clientid client)))))
