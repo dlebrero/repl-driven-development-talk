@@ -10,14 +10,6 @@
 
 (def counter (atom 0))
 
-;;
-;; Schemas.
-;;
-
-(s/defschema PingResponse
-  "The ping request/response"
-  {:who String})
-
 ;;;
 ;;; Http API
 ;;;
@@ -30,14 +22,13 @@
   (GET* "/ping" []
         :summary "ping pong"
         :query-params [who :- String]
-        :return PingResponse
         (ok {:who "me!"}))
 
   (route/not-found "<h1>Page not found</h1>"))
 
 
 (comment
-  (-> (slurp "http://localhost:8080/testservice/wls?accountId=PAJ94")
+  (-> (slurp "http://localhost:8080/testservice/total?client=1")
       (cheshire.core/parse-string true)
       (try (catch Exception e e))
       >pprint
