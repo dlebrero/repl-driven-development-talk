@@ -6,7 +6,7 @@
     [midje.sweet]))
 
 
-(deftest wls
-  (fact "just editables"
-        (comment (let [wls ,]
-                   (db/parse-wls wls) => ["yeah"]))))
+(deftest total
+  (fact "just valid tx in total"
+        #_(let [txs ]
+          (db/summary txs) => 42.0)))
