@@ -6,7 +6,6 @@
     [compojure.route :as route]
     [com.iggroup.wt.testservice.core :as core]
     [com.iggroup.wt.testservice.db :as db]
-    [com.iggroup.wt.testservice.http :as http]
     [schema.core :as s]))
 
 (def counter (atom 0))
