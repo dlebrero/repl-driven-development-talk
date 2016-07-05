@@ -17,7 +17,7 @@
   (info "Application starting up now ...")
   (let [routes (-> (var routes/http-api)
                    util/remove-context
-                   (util/wrap-with-additional-keys-in-req :foo :bar))
+                   (util/wrap-with-additional-keys-in-req :db "jdbc:postgresql://localhost:5432/dlebrero"))
         system {:app-config app-config
                 :routes     routes}]
     (info "Application started")
