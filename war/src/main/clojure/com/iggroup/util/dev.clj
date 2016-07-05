@@ -16,8 +16,14 @@
                       (clojure.java.jdbc/metadata-query (.getTables m catalog schema table types))))
 
 (defn find-proc [db & {:keys [catalog schema name] :or {name "%"}}]
-  (j/with-db-metadata [m db]
-                      (j/metadata-query (.getProcedures m catalog schema name))))
+  (map #(select-keys % [:procedure_cat
+                        :procedure_schem
+                        :procedure_name
+                        :remarks
+                        :procedure_type
+                        :specific_name])
+       (j/with-db-metadata [m db]
+                           (j/metadata-query (.getProcedures m catalog schema name)))))
 
 (defn describe-proc
   [db proc-spec-or-keyword & more]
@@ -49,7 +55,8 @@
     "BPCHAR" 'Types/VARCHAR
     "REFCURSOR" 'Types/OTHER
     "NUMBER" 'Types/NUMBER
-    "INT4" 'Types/NUMBER
+    "INT4" 'Types/BIGINT
+    "INT8" 'Types/BIGINT
     "TIMESTAMP" 'Types/TIMESTAMP
     "DATE" 'Types/DATE
     "BLOB" 'Types/BLOB))
