@@ -5,6 +5,8 @@
   (:require [com.iggroup.wt.testservice
              [routes :as routes]
              [servlet-handler :as servlet]]
+            incanter.core
+            incanter.charts
             [com.iggroup.wt.testservice.util :as util]
             [clojure.tools.nrepl.server :as nrepl]))
 
