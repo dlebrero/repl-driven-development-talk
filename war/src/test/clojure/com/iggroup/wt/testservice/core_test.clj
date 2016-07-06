@@ -8,5 +8,5 @@
 
 (deftest total
   (fact "just valid tx in total"
-        #_(let [txs ]
+        #_(let [txs []]
           (db/summary txs) => 42.0)))
