@@ -25,8 +25,6 @@
 
   (jdbc/query db ["select * from transaction"])
 
-  (take 3 (jdbc/query db ["select * from transaction"]))
-
   (>print-table (take 3 (jdbc/query db ["select * from transaction"])))
 
   (jdbc/query db ["select * from transaction where client = ?" 1])
@@ -46,11 +44,6 @@
   (>print-table (dev/find-proc db :name "%trans%" :schema "public"))
 
   (dev/find-proc db :name "transactions_in_gbp")
-
-  (->> (dev/find-proc db :name "transactions_in_gbp")
-       first
-       (dev/describe-proc db)
-       >print-table)
 
   (->> (dev/find-proc db :name "transactions_in_gbp")
       first
