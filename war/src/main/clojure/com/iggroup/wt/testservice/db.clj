@@ -19,9 +19,9 @@
 
 (comment
 
-  (dev/find-table db :schema "public" :table "%transa%")
+  (dev/find-table db :table "transa%" :schema "public")
   (>print-table
-    (dev/find-table db :schema "public" :table "%transa%"))
+    (dev/find-table db :table "transa%" :schema "public"))
 
   (jdbc/query db ["select * from transaction"])
 
