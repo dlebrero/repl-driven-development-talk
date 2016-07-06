@@ -28,12 +28,14 @@
 
 
 (comment
-  (-> (slurp "http://localhost:8080/testservice/total?client=1")
-      (cheshire.core/parse-string true)
-      (try (catch Exception e e))
-      >pprint
-      future)
-  )
+  (do
+    (-> (slurp "http://localhost:8080/testservice/total?client=1")
+        (cheshire.core/parse-string true)
+        (try (catch Exception e e))
+        >pprint
+        future)
+    nil))
+
 (comment
   @counter
   (reset! counter 1020202)
