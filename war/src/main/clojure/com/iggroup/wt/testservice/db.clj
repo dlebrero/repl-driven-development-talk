@@ -34,7 +34,7 @@
 
   (>print-table (by-client db 1))
 
-  (http/get "http://localhost:30000/exchanges")
+  (http/get "http://localhost:30000/exchanges/")
   )
 
 (comment
