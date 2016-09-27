@@ -34,7 +34,15 @@
 
   (>print-table (by-client db 1))
 
-  (http/get "http://localhost:30000/exchanges/")
+  (http/get "http://localhost:3000/exchanges")
+
+  (do
+    (require '(incanter core charts))
+
+    (->> p
+         clojure.core.matrix.dataset/dataset
+         (incanter.charts/time-series-plot :time :EUR :data)
+         incanter.core/view))
   )
 
 (comment
@@ -46,28 +54,14 @@
   (dev/find-proc db :name "transactions_in_gbp")
 
   (->> (dev/find-proc db :name "transactions_in_gbp")
-      first
+       first
        (dev/describe-proc db)
        dev/print-definition)
   )
 
 (comment
-
   (transactions-in-gbp db :clientid 1)
-
-  (mapcat
-    #(:return-value (transactions-in-gbp db :clientid %))
-    (range 15))
-
-  (do
-    (require '(incanter core charts))
-    (->> (mapcat
-           #(-> (transactions-in-gbp db :clientid %)
-                :return-value)
-           (range 20))
-         (map (comp #(BigDecimal. %) :amount))
-         incanter.charts/histogram
-         incanter.core/view)))
+  )
 
 (defn type= [expected]
   (fn [tx]
@@ -85,4 +79,6 @@
 
 (comment
   (defn total-transactions [db client]
-    (summary (:return-value (transactions-in-gbp db :clientid client)))))
+    (-> (transactions-in-gbp db :clientid client)
+        :return-value
+        summary)))
