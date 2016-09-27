@@ -23,7 +23,7 @@
   (>print-table
     (dev/find-table db :table "transa%" :schema "public"))
 
-  (jdbc/query db ["select * from transaction"])
+  (jdbc/query db ["select * from transaction limit 5"])
 
   (>print-table (take 3 (jdbc/query db ["select * from transaction"])))
 
