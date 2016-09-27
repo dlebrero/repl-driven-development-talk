@@ -24,8 +24,6 @@
     [com.iggroup.wt.testservice.component-tests :as ctest]
     [cemerick.pomegranate :as pomegranate]))
 
-(set! *print-length* 10)
-
 (comment
   "If there is a compilation issue and this namespace is not available run:"
   (clojure.tools.namespace.repl/refresh-all) or (>refresh-all)

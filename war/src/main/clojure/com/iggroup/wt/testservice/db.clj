@@ -10,6 +10,8 @@
 
 
 (comment
+  (set! *print-length* 10)
+
   (def db "jdbc:postgresql://localhost:5431/dlebrero")
 
   (jdbc/query db "select 1")
