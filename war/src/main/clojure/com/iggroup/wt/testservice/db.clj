@@ -12,7 +12,7 @@
 (comment
   (set! *print-length* 10)
 
-  (def db "jdbc:postgresql://localhost:5431/dlebrero")
+  (def db "jdbc:postgresql://localhost:5431/dlebrer")
 
   (jdbc/query db "select 1")
 
@@ -29,7 +29,7 @@
 
   (>print-table (take 3 (jdbc/query db ["select * from transaction"])))
 
-  (jdbc/query db ["select * from transaction where client = ?" 1])
+  (jdbc/query db ["select * from transaction where client = 1"])
   )
 
 (comment
@@ -42,6 +42,7 @@
     (require '(incanter core charts))
 
     (->> p
+         (take 20)
          clojure.core.matrix.dataset/dataset
          (incanter.charts/time-series-plot :time :EUR :data)
          incanter.core/view))
