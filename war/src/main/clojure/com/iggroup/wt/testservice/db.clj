@@ -24,9 +24,12 @@
   (>print-table
     (dev/find-table db :table "transa%" :schema "public"))
 
-  (>print-table (take 5 (jdbc/query db ["select * from transaction"])))
+  (>print-table
+    (take 5
+          (jdbc/query db ["select * from transaction"])))
 
-  (>print-table (dev/find-proc db :name "%trans%" :schema "public"))
+  (>print-table
+    (dev/find-proc db :name "%trans%" :schema "public"))
 
   (->> (dev/find-proc db :name "transactions_in_gbp")
        first
