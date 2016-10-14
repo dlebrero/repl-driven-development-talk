@@ -16,6 +16,8 @@
 
   (jdbc/query db "select 1")
 
+  (user/add-dependencies '[[org.postgresql/postgresql "9.4-1202-jdbc42"]])
+
   )
 
 (comment
@@ -55,6 +57,10 @@
          (map (comp #(BigDecimal. %) :amount))
          incanter.charts/histogram
          incanter.core/view))
+
+
+  (http/get "http://localhost:3000/exchanges")
+
   )
 
 (defn type= [expected]
