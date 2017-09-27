@@ -27,8 +27,7 @@
     (dev/find-table db :table "transa%" :schema "public"))
 
   (>print-table
-    (take 5
-          (jdbc/query db ["select * from transaction"])))
+    (jdbc/query db ["select * from transaction LIMIT 5"]))
 
   (>print-table
     (dev/find-proc db :name "%trans%" :schema "public"))
