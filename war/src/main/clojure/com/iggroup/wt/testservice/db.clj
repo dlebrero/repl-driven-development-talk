@@ -57,9 +57,6 @@
          incanter.charts/histogram
          incanter.core/view))
 
-
-  (http/get "http://localhost:3000/exchanges")
-
   )
 
 (defn type= [expected]
