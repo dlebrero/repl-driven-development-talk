@@ -1,3 +1,3 @@
 (ns com.iggroup.wt.testservice.core
-  "Some doc")
-
+  (:require [cheshire.core :as json]
+            [clj-http.client :as http]))
