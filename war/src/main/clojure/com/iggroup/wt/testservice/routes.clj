@@ -19,15 +19,14 @@
   (swagger-docs
     {:info {:title "Sample api"}})
 
-  (GET* "/ping" []
-        :summary "ping pong"
-        :query-params [who :- String]
-        (ok {:who "me!"}))
-
-  (GET* "/inc" []
+  (POST* "/inc" []
         :summary "increment counter"
         (swap! counter inc)
         (ok {:done "yes"}))
+
+  (GET* "/counter" []
+        :summary "counter"
+        (ok {:current @counter}))
 
   (route/not-found "<h1>Page not found</h1>"))
 
