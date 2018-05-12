@@ -8,7 +8,7 @@
     [com.iggroup.wt.testservice.db :as db]
     [schema.core :as s]))
 
-(def counter (atom 0))
+(defonce counter (atom 0))
 
 ;;;
 ;;; Http API
@@ -23,6 +23,11 @@
         :summary "ping pong"
         :query-params [who :- String]
         (ok {:who "me!"}))
+
+  (GET* "/inc" []
+        :summary "increment counter"
+        (swap! counter inc)
+        (ok {:done "yes"}))
 
   (route/not-found "<h1>Page not found</h1>"))
 
