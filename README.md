@@ -1,7 +1,6 @@
 REPL Driven Development talk
 ============================
  
-Project used for the talk at [Skills Matter](https://skillsmatter.com/meetups/8087-using-repl-driven-development) for the London Java Community. Slides are [here](https://github.com/IG-Group/jug-repl-driven-development-talk/blob/master/Using%20REPL%20driven%20development.key)
  
 Running
 =======
