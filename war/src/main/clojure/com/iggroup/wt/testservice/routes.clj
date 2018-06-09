@@ -6,6 +6,7 @@
     [compojure.route :as route]
     [com.iggroup.wt.testservice.core :as core]
     [com.iggroup.wt.testservice.db :as db]
+    [clojure.tools.logging :as log]
     [schema.core :as s]))
 
 (def counter (atom 0))
