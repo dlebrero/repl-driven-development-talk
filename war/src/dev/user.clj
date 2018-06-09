@@ -22,6 +22,7 @@
     com.iggroup.wt.testservice.util
     current-env
     [com.iggroup.wt.testservice.component-tests :as ctest]
+    com.iggroup.wt.testservice.core-test
     [cemerick.pomegranate :as pomegranate]))
 
 (comment
