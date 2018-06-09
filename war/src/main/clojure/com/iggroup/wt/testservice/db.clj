@@ -12,7 +12,7 @@
 (comment
   (set! *print-length* 30)
 
-  (def db "jdbc:postgresql://localhost:5432/dlebrero")
+  (def db "jdbc:postgresql://localhost:5431/dlebrer")
 
   (jdbc/query db "select 1")
 
