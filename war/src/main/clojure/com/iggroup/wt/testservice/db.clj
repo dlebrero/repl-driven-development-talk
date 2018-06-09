@@ -42,6 +42,16 @@
 
   (->> (dev/find-proc db :name "transactions_in_gbp")
        first
+       (dev/describe-proc db))
+
+  (->> (dev/find-proc db :name "transactions_in_gbp")
+       first
+       (dev/describe-proc db)
+       (map #(select-keys % [:ordinal_position :column_name :type_name :nullable :precision]))
+       >print-table)
+
+  (->> (dev/find-proc db :name "transactions_in_gbp")
+       first
        (dev/describe-proc db)
        dev/print-definition)
   )
