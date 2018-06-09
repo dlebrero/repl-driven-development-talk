@@ -10,7 +10,7 @@
 
 
 (comment
-  (set! *print-length* 10)
+  (set! *print-length* 30)
 
   (def db "jdbc:postgresql://localhost:5432/dlebrero")
 
