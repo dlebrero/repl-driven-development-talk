@@ -29,6 +29,14 @@
   (>print-table
     (jdbc/query db ["select * from transaction LIMIT 5"]))
 
+  (http/get "http://localhost:3000/exchanges")
+
+  )
+
+
+
+(comment
+
   (>print-table
     (dev/find-proc db :name "%trans%" :schema "public"))
 
@@ -39,13 +47,18 @@
   )
 
 
-
 (comment
 
   (transactions-in-gbp db :clientid 1)
 
   (map (fn [c] (transactions-in-gbp db :clientid c))
        (range 1 10))
+
+  (->>
+    (transactions-in-gbp db :clientid 1)
+    :return-value
+    (map (fn [x] (assoc x :euro (euro (:timestamp x)))))
+    >print-table)
 
   (do
     (require '(incanter core charts))
