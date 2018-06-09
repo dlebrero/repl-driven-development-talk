@@ -67,7 +67,10 @@
   (->>
     (transactions-in-gbp db :clientid 1)
     :return-value
-    (map (fn [x] (assoc x :euro (euro (:timestamp x)))))
+    (map (fn [x] (merge x (->
+                            (http/get "http://localhost:3000/exchanges" {:query-params {:date (:timestamp x)}})
+                            :body
+                            (json/parse-string true)))))
     >print-table)
 
   (do
