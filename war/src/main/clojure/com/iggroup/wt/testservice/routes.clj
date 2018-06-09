@@ -38,6 +38,13 @@
     nil))
 
 (comment
+
   @counter
+
+
   (reset! counter 1020202)
-  (user/reset))
+
+
+  (user/reset)
+  (user/stop-autotest)
+  )
