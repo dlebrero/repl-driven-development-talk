@@ -75,13 +75,14 @@
 
   (do
     (require '(incanter core charts))
-    (->> (mapcat
-           #(-> (transactions-in-gbp db :clientid %)
-                :return-value)
-           (range 20))
+    (->> (mapcat #(-> (transactions-in-gbp db :clientid %) :return-value) (range 20))
          (map (comp #(BigDecimal. %) :amount))
-         incanter.charts/histogram
-         incanter.core/view))
+         incanter.charts/histogram incanter.core/view)
+    (->> (for [x (range (System/currentTimeMillis)
+                        (+ 60000 (System/currentTimeMillis))
+                        1000)]
+           (-> (http/get "http://localhost:3000/exchanges" {:query-params {:date x}}) :body (json/parse-string true) (assoc :time x)))
+         (take 60) clojure.core.matrix.dataset/dataset (incanter.charts/time-series-plot :time :EUR :data) incanter.core/view))
 
   )
 
