@@ -12,8 +12,9 @@
                       (clojure.java.jdbc/metadata-query (.getColumns m catalog schema table column))))
 
 (defn find-table [db & {:keys [catalog schema table types]}]
-  (j/with-db-metadata [^DatabaseMetaData m db]
-                      (clojure.java.jdbc/metadata-query (.getTables m catalog schema table types))))
+  (mapv #(dissoc % :table_cat :remarks)
+        (j/with-db-metadata [^DatabaseMetaData m db]
+          (clojure.java.jdbc/metadata-query (.getTables m catalog schema table types)))))
 
 (defn find-proc [db & {:keys [catalog schema name] :or {name "%"}}]
   (map #(select-keys % [:procedure_schem
