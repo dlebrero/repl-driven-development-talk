@@ -9,4 +9,4 @@
 (deftest total
   (fact "just valid tx in total"
     (let [txs []]
-      (db/summary txs) => 0.0)))
+      (db/summary txs) => 10.0)))
