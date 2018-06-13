@@ -23,7 +23,9 @@
     current-env
     [com.iggroup.wt.testservice.component-tests :as ctest]
     com.iggroup.wt.testservice.core-test
-    [cemerick.pomegranate :as pomegranate]))
+    [dynapath.dynamic-classpath :as dc]
+    [cemerick.pomegranate :as pomegranate])
+  (:import (java.net URLClassLoader)))
 
 (comment
   "If there is a compilation issue and this namespace is not available run:"
@@ -91,3 +93,19 @@
                                 :local-repo "C:\\dev\\maven-repo"
                                 :repositories {"central"    "http://repo1.maven.org/maven2/"
                                                "clojars"    "http://clojars.org/repo"}))
+
+(defn call-method
+  [obj method-name & args]
+  (let [m (first (filter (fn [x] (.. x getName (equals method-name)))
+                         (.. obj getClass getDeclaredMethods)))]
+    (. m (setAccessible true))
+    (. m (invoke obj (into-array Object args)))))
+
+
+(let [base-url-classloader (assoc dc/base-readable-addable-classpath
+                             :classpath-urls #(seq (.getURLs ^URLClassLoader %)))]
+  (extend org.apache.catalina.loader.WebappClassLoader
+    dc/DynamicClasspath
+    (assoc base-url-classloader
+      :add-classpath-url (fn [^org.apache.catalina.loader.WebappClassLoader cl url]
+                           (call-method cl "addURL" url)))))

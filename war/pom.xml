@@ -47,7 +47,7 @@
       <dependency>
          <groupId>org.clojure</groupId>
          <artifactId>clojure</artifactId>
-         <version>1.7.0</version>
+         <version>1.9.0</version>
       </dependency>
       <dependency>
          <groupId>org.clojure</groupId>
@@ -180,7 +180,7 @@
       <dependency>
          <groupId>com.cemerick</groupId>
          <artifactId>pomegranate</artifactId>
-         <version>0.3.0</version>
+         <version>1.0.0</version>
          <scope>test</scope>
       </dependency>
 
@@ -200,7 +200,7 @@
       <dependency>
          <groupId>midje</groupId>
          <artifactId>midje</artifactId>
-         <version>1.7.0</version>
+         <version>1.9.1</version>
          <scope>test</scope>
       </dependency>
 
