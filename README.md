@@ -5,6 +5,7 @@ REPL Driven Development talk
 Running
 =======
  
+      cd war  
       mvn clean install -Pdevrun
  
 API
