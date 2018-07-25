@@ -5,6 +5,9 @@ REPL Driven Development talk
 Running
 =======
  
+      cd deps
+      docker-compose up --build -d
+      cd ..
       cd war  
       mvn clean install -Pdevrun
  
