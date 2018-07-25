@@ -1,8 +1,11 @@
 version: "3"
 services:
  postgres:
-   image: postgres:9.5.13
+   build: postgres
    ports:
     - "5432:5432"
-   volumes:
-     - ./postgres:/docker-entrypoint-initdb.d/
+
+ fx-server:
+   build: fx-server
+   ports:
+    - "3000:3000"
